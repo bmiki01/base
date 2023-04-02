@@ -5,7 +5,7 @@ import hu.bme.mit.train.interfaces.TrainController;
 public class TrainControllerImpl implements TrainController {
 
 	private int step = 0;
-	//private int referenceSpeed = 0;
+	private int referenceSpeed = 0;
 	private int speedLimit = 0;
 	private boolean emergencybrake = false;
 
@@ -28,7 +28,9 @@ public class TrainControllerImpl implements TrainController {
 		}
 		if (referenceSpeed < 0) {
 			referenceSpeed = 0;
-		} else {
+		}
+		else
+		{
 		    if(referenceSpeed+step > 0) {
                 referenceSpeed += step;
             } else {
