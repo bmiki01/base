@@ -32,7 +32,7 @@ public class TrainControllerImpl implements TrainController {
 	@Override
 	public void incrementSpeedPeriod(){
 		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(followSpeed(),100,100);
+		timer.scheduleAtFixedRate(TimerTask(followSpeed()),100,100);
 	}
 
 	@Override
