@@ -1,6 +1,9 @@
 package hu.bme.mit.train.controller;
 
 import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import hu.bme.mit.train.interfaces.TrainController;
 
@@ -31,8 +34,9 @@ public class TrainControllerImpl implements TrainController {
 
 	@Override
 	public void incrementSpeedPeriod(){
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(TimerTask(followSpeed()),100,100);
+		ScheduledExecutorService s;
+		s = Executors.newSingleThreadScheduledExecutor();
+		s.scheduleAtFixedRate(followSpeed(), 100,100);
 	}
 
 	@Override
