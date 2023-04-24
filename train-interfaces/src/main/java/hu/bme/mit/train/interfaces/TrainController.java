@@ -4,7 +4,11 @@ public interface TrainController {
 
 	void followSpeed();
 
-	void incrementSpeed();
+	void incrementing() throws InterruptedException;
+
+	void startIncrementing();
+
+	void stopIncrementing();
 
 	int getReferenceSpeed();
 

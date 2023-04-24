@@ -35,11 +35,25 @@ public class TrainControllerImpl implements TrainController {
 	}
 
 	@Override
-	public void incrementSpeed()
+	public void incrementing() throws InterruptedException
 	{
-		TimerTask timerT = followSpeed();
-		Timer timer = new Timer();
-		timer.scheduleAtFixedRate(timerT, 2000, 2000);
+		while(moving)
+		{
+			followSpeed();
+			Thread.sleep(timeLimit * 1000);
+		}
+	}
+
+	@Override
+	public void startIncrementing()
+	{
+		moving = true;
+	}
+
+	@Override
+	public void stopIncrementing()
+	{
+		moving = false;
 	}
 
 	@Override
