@@ -1,5 +1,11 @@
 package hu.bme.mit.train.controller;
 
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
 import hu.bme.mit.train.interfaces.TrainController;
 
 public class TrainControllerImpl implements TrainController {
@@ -8,6 +14,14 @@ public class TrainControllerImpl implements TrainController {
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
 	private int emergencyBrake = -500;
+	
+
+	public TrainControllerImpl() {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(() -> {
+            followSpeed();
+        }, 0, 1, TimeUnit.SECONDS);
+    }
 
 	@Override
 	public void followSpeed() {
