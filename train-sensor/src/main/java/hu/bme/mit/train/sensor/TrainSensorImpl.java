@@ -21,12 +21,26 @@ public class TrainSensorImpl implements TrainSensor {
 	}
 
 	@Override
+	public boolean checkAbsoluteLimit(int speedlim){
+		return speedlim<0 || speedlim > 500;
+	}
+
+	@Override
+	public boolean checkRelativeLimit(int speedlim){
+		return speedlim < controller.getReferenceSpeed()*0.5;
+	}
+
+
+	@Override
 	public int getSpeedLimit() {
 		return speedLimit;
 	}
 
 	@Override
 	public void overrideSpeedLimit(int speedLimit) {
+		if(checkAbsoluteLimit(speedLimit)||checkRelativeLimit(speedLimit)){
+			this.user.setAlarmState(true);
+		}
 		this.speedLimit = speedLimit;
 		controller.setSpeedLimit(speedLimit);
 	}
