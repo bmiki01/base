@@ -33,12 +33,11 @@ public class TrainControllerImpl implements TrainController {
 	@Override
 	public void incrementSpeed()
 	{
-		while(true)
+		while(!setJoystickPosition() || referenceSpeed != speedLimit)
 		{
-			thread.sleep(1000)
+			thread.sleep(1000);
 			followSpeed();
 		}
-
 	}
 
 	@Override
