@@ -3,6 +3,9 @@ package hu.bme.mit.train.controller;
 import hu.bme.mit.train.interfaces.TrainController;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class TrainControllerImpl implements TrainController {
 
@@ -10,6 +13,14 @@ public class TrainControllerImpl implements TrainController {
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
 	private int emergencyBrake = -500;
+
+
+	public TrainControllerImpl() {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(() -> {
+            followSpeed();
+        }, 0, 2, TimeUnit.SECONDS);
+    }
 
 	@Override
 	public void followSpeed() {
@@ -29,23 +40,6 @@ public class TrainControllerImpl implements TrainController {
 		enforceSpeedLimit();
 	}
 
-
-	@Override
-	public void incrementSpeed()
-	{
-		Thread t = new Thread()
-		t.start();
-		while(true)
-		{
-			t.sleep(1000);
-			followSpeed();
-			if(setJoystickPosition() || referenceSpeed == speedLimit)
-			{
-				t.stop();
-				break;
-			}
-		}
-	}
 
 	@Override
 	public int getReferenceSpeed() {
