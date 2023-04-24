@@ -42,13 +42,6 @@ public class TrainControllerImpl implements TrainController {
 	}
 
 	@Override
-	public void incrementSpeedPeriod(){
-		ScheduledExecutorService s;
-		s = Executors.newSingleThreadScheduledExecutor();
-		s.scheduleAtFixedRate(followSpeed(), 100,100);
-	}
-
-	@Override
 	public int getReferenceSpeed() {
 		return referenceSpeed;
 	}
