@@ -13,6 +13,14 @@ public class TrainControllerImpl implements TrainController {
 	private int referenceSpeed = 0;
 	private int speedLimit = 0;
 	private int emergencyBrake = -500;
+	
+
+	public TrainControllerImpl() {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        executor.scheduleAtFixedRate(() -> {
+            followSpeed();
+        }, 0, 1, TimeUnit.SECONDS);
+    }
 
 	@Override
 	public void followSpeed() {
